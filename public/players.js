@@ -4,24 +4,59 @@ let activePlayers = [];
 
 function escapeHTML(text) {
     const div = document.createElement("div");
-    div.innerText = text;
+    div.textContent = text || "";
     return div.innerHTML;
 }
 
+function formatDuration(startTime) {
+
+    if (!startTime) return "-";
+
+    let diff = Math.floor((Date.now() - Number(startTime)) / 1000);
+
+    // Hindari nilai negatif
+    if (diff < 0) diff = 0;
+
+    const days = Math.floor(diff / 86400);
+    const hours = Math.floor((diff % 86400) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    if (days > 0)
+        return `${days} Hari ${hours} Jam`;
+
+    if (hours > 0)
+        return `${hours} Jam ${minutes} Menit`;
+
+    if (minutes > 0)
+        return `${minutes} Menit ${seconds} Detik`;
+
+    return `${seconds} Detik`;
+}
+
 async function fetchPlayers() {
+
     try {
+
         const res = await fetch("/api/server");
+
         const data = await res.json();
 
-        activePlayers = data.players || [];
+        activePlayers = Array.isArray(data.players)
+            ? data.players
+            : [];
+
         updateTable();
 
     } catch (err) {
+
         console.error(err);
 
         playerListEl.innerHTML = `
         <tr>
-            <td colspan="4">Server Offline</td>
+            <td colspan="4" style="text-align:center;">
+                Server Offline
+            </td>
         </tr>`;
     }
 }
@@ -44,24 +79,11 @@ function updateTable() {
 
     activePlayers.forEach(player => {
 
-        let duration = "-";
-
-        if (player.startTime) {
-
-            const diff = Math.floor((Date.now() - player.startTime) / 1000);
-
-            const h = Math.floor(diff / 3600);
-            const m = Math.floor((diff % 3600) / 60);
-            const s = diff % 60;
-
-            duration = `${h}j ${m}m ${s}d`;
-        }
-
         playerListEl.innerHTML += `
         <tr>
             <td>${escapeHTML(player.name)}</td>
-            <td>${duration}</td>
-            <td>${player.ping}</td>
+            <td>${formatDuration(player.startTime)}</td>
+            <td>${player.ping} ms</td>
             <td>${player.score}</td>
         </tr>`;
     });
