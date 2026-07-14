@@ -5,8 +5,11 @@
 const chat = document.getElementById("chat");
 const prompt = document.getElementById("prompt");
 const playersEl = document.getElementById("players");
+const playerListEl = document.getElementById("player-list");
+const copyBtn = document.querySelector(".copy-btn");
 
 let loading = false;
+let activePlayers = [];
 
 /* ==========================================
    Utility Functions
@@ -72,7 +75,6 @@ async function sendMessage() {
     prompt.focus();
 }
 
-// Event Listener untuk tombol Enter
 if (prompt) {
     prompt.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
@@ -83,45 +85,110 @@ if (prompt) {
 }
 
 /* ==========================================
-   Server Stats System
+   Server Stats & Player List System
 ========================================== */
-async function getPlayers() {
-    if (!playersEl) return;
+async function fetchServerData() {
     try {
         const res = await fetch("/api/server");
         const data = await res.json();
-        playersEl.innerText = data.online ? `${data.players} / ${data.maxplayers}` : "Offline";
-    } catch (e) {
-        playersEl.innerText = "Offline";
+
+        activePlayers = Array.isArray(data.players) ? data.players : [];
+
+        if (playersEl) {
+            playersEl.innerText = data.online
+                ? `${activePlayers.length} / ${data.maxplayers}`
+                : "Offline";
+        }
+
+        updatePlayerTable();
+
+    } catch (err) {
+        console.error(err);
+
+        if (playersEl) playersEl.innerText = "Offline";
+
+        activePlayers = [];
+        updatePlayerTable();
     }
 }
 
-// Jalankan dan Update setiap 30 detik
-getPlayers();
-setInterval(getPlayers, 30000);
+function updatePlayerTable() {
+    if (!playerListEl) return;
+
+    playerListEl.innerHTML = "";
+
+    if (activePlayers.length === 0) {
+        playerListEl.innerHTML = `
+        <tr>
+            <td colspan="4" style="text-align:center;">
+                Tidak ada pemain online
+            </td>
+        </tr>`;
+        return;
+    }
+
+    activePlayers.forEach(player => {
+
+        let duration = "-";
+
+        if (player.startTime) {
+            const diff = Math.floor((Date.now() - player.startTime) / 1000);
+
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            const s = diff % 60;
+
+            duration = `${h}j ${m}m ${s}d`;
+        }
+
+        playerListEl.innerHTML += `
+        <tr>
+            <td>${escapeHTML(player.name || "-")}</td>
+            <td>${duration}</td>
+            <td>${player.ping ?? 0} ms</td>
+            <td>${player.score ?? 0}</td>
+        </tr>`;
+    });
+}
+
+/* ==========================================
+   Auto Refresh Server
+========================================== */
+
+fetchServerData();
+
+// update setiap 5 detik
+setInterval(fetchServerData, 5000);
+
+// update durasi tiap detik
+setInterval(updatePlayerTable, 1000);
 
 /* ==========================================
    UI Effects
 ========================================== */
 window.addEventListener("scroll", () => {
     const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 40) {
-        navbar.style.background = "rgba(10,10,10,.90)";
-        navbar.style.boxShadow = "0 15px 30px rgba(0,0,0,.35)";
-    } else {
-        navbar.style.background = "rgba(10,10,10,.55)";
-        navbar.style.boxShadow = "none";
+    if (navbar) {
+        if (window.scrollY > 40) {
+            navbar.style.background = "rgba(10,10,10,.90)";
+            navbar.style.boxShadow = "0 15px 30px rgba(0,0,0,.35)";
+        } else {
+            navbar.style.background = "rgba(10,10,10,.55)";
+            navbar.style.boxShadow = "none";
+        }
     }
 });
 
 // Copy IP Button
-const copyBtn = document.querySelector(".copy-btn");
 if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
-        const ip = document.querySelector(".server-ip").innerText;
-        await navigator.clipboard.writeText(ip);
-        copyBtn.innerText = "✅ IP Tersalin";
-        setTimeout(() => copyBtn.innerText = "📋 Copy IP", 2000);
+        const ipEl = document.querySelector(".server-ip");
+        if (ipEl) {
+            const ip = ipEl.innerText;
+            await navigator.clipboard.writeText(ip);
+            copyBtn.innerText = "✅ IP Tersalin";
+            setTimeout(() => copyBtn.innerText = "📋 Copy IP", 2000);
+        }
     });
 }
 
