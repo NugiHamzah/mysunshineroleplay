@@ -8,19 +8,14 @@ function escapeHTML(text) {
     return div.innerHTML;
 }
 
-function formatDuration(startTime) {
+function formatDuration(seconds) {
 
-    if (!startTime) return "-";
+    seconds = Number(seconds) || 0;
 
-    let diff = Math.floor((Date.now() - Number(startTime)) / 1000);
-
-    // Hindari nilai negatif
-    if (diff < 0) diff = 0;
-
-    const days = Math.floor(diff / 86400);
-    const hours = Math.floor((diff % 86400) / 3600);
-    const minutes = Math.floor((diff % 3600) / 60);
-    const seconds = diff % 60;
+    const days = Math.floor(seconds / 86400);
+    const hours = Math.floor((seconds % 86400) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
 
     if (days > 0)
         return `${days} Hari ${hours} Jam`;
@@ -29,9 +24,9 @@ function formatDuration(startTime) {
         return `${hours} Jam ${minutes} Menit`;
 
     if (minutes > 0)
-        return `${minutes} Menit ${seconds} Detik`;
+        return `${minutes} Menit ${secs} Detik`;
 
-    return `${seconds} Detik`;
+    return `${secs} Detik`;
 }
 
 async function fetchPlayers() {
@@ -39,7 +34,6 @@ async function fetchPlayers() {
     try {
 
         const res = await fetch("/api/server");
-
         const data = await res.json();
 
         activePlayers = Array.isArray(data.players)
@@ -59,6 +53,7 @@ async function fetchPlayers() {
             </td>
         </tr>`;
     }
+
 }
 
 function updateTable() {
@@ -80,12 +75,14 @@ function updateTable() {
     activePlayers.forEach(player => {
 
         playerListEl.innerHTML += `
-        <tr>
-            <td>${escapeHTML(player.name)}</td>
-            <td>${formatDuration(player.startTime)}</td>
-            <td>${player.ping} ms</td>
-            <td>${player.score}</td>
-        </tr>`;
+            <tr>
+                <td>${escapeHTML(player.name)}</td>
+                <td>${formatDuration(player.loginDuration)}</td>
+                <td>${player.ping} ms</td>
+                <td>${player.score}</td>
+            </tr>
+        `;
+
     });
 
 }
@@ -93,4 +90,3 @@ function updateTable() {
 fetchPlayers();
 
 setInterval(fetchPlayers, 5000);
-setInterval(updateTable, 1000);
