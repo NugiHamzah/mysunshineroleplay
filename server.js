@@ -16,25 +16,33 @@ app.use(express.static(path.join(__dirname, "public")));
 /* ==========================================
    TRACKING DURASI PEMAIN
 ========================================== */
-let playerLogins = {}; // Menyimpan { "NamaPemain": Timestamp }
+let playerLogins = {};
 
 function updatePlayerDurations(currentPlayers) {
-    const now = Date.now();
-    let newPlayerLogins = {};
 
-    currentPlayers.forEach(p => {
-        // Jika pemain baru muncul, catat waktu loginnya sekarang
-        newPlayerLogins[p.name] = playerLogins[p.name] || now;
+    const now = Date.now();
+
+    // Hapus player yang sudah logout
+    Object.keys(playerLogins).forEach(name => {
+        if (!currentPlayers.some(p => p.name === name)) {
+            delete playerLogins[name];
+        }
     });
 
-    // Update state global
-    playerLogins = newPlayerLogins;
-    
-    // Kembalikan daftar pemain dengan tambahan properti startTime
-    return currentPlayers.map(p => ({
-        ...p,
-        startTime: playerLogins[p.name]
-    }));
+    return currentPlayers.map(player => {
+
+        if (!playerLogins[player.name]) {
+            playerLogins[player.name] = now;
+        }
+
+        return {
+            ...player,
+            startTime: playerLogins[player.name],
+            loginDuration: Math.floor((now - playerLogins[player.name]) / 1000)
+        };
+
+    });
+
 }
 
 /* ==========================================
