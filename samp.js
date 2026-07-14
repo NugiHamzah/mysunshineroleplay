@@ -2,9 +2,6 @@ const samp = require("samp-query");
 
 /**
  * Query Server SA-MP
- * @param {string} host
- * @param {number} port
- * @returns {Promise<Object>}
  */
 function querySamp(host, port) {
     return new Promise((resolve, reject) => {
@@ -15,33 +12,43 @@ function querySamp(host, port) {
                 port,
                 timeout: 5000
             },
-            (error, response) => {
+            (err, response) => {
 
-                if (error) {
-                    console.error("SA-MP QUERY ERROR:", error);
-                    return reject(error);
+                if (err) {
+                    console.error(err);
+                    return reject(err);
                 }
 
-                // Debug hasil query
                 console.log("===== SA-MP RESPONSE =====");
-                console.log(response);
+                console.dir(response, { depth: null });
                 console.log("==========================");
-
-                // Ambil jumlah player dari beberapa kemungkinan field
-                const players =
-                    response.online ??
-                    response.players ??
-                    response.playerCount ??
-                    0;
 
                 resolve({
                     online: true,
-                    hostname: response.hostname || "Unknown Server",
+
+                    hostname: response.hostname || "Unknown",
+
                     gamemode: response.gamemode || "",
+
                     language: response.language || "",
-                    players: players,
-                    maxplayers: response.maxplayers || response.maxPlayers || 0
+
+                    onlinePlayers:
+                        response.online ??
+                        response.playerCount ??
+                        (Array.isArray(response.players)
+                            ? response.players.length
+                            : 0),
+
+                    maxplayers:
+                        response.maxplayers ??
+                        response.maxPlayers ??
+                        0,
+
+                    players: Array.isArray(response.players)
+                        ? response.players
+                        : []
                 });
+
             }
         );
 
