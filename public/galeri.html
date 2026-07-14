@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri - My Sunshine Roleplay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body{
+            margin:0;
+            font-family:Arial,Helvetica,sans-serif;
+            background:
+            linear-gradient(rgba(10,15,25,.85),rgba(10,15,25,.95)),
+            url("https://i.imgur.com/sfS2k7m.jpeg") center/cover fixed;
+            color:white;
+        }
+
+        .gallery-header{
+            text-align:center;
+            padding:120px 20px 60px;
+        }
+
+        .gallery-header h1{
+            font-size:48px;
+            margin-bottom:15px;
+        }
+
+        .gallery-header p{
+            color:#bfc8d6;
+            max-width:700px;
+            margin:auto;
+        }
+
+        .gallery{
+            max-width:1300px;
+            margin:auto;
+            padding:30px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:25px;
+        }
+
+        .card{
+            overflow:hidden;
+            border-radius:18px;
+            background:rgba(255,255,255,.08);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,.1);
+            transition:.35s;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 20px 40px rgba(0,0,0,.35);
+        }
+
+        .card img{
+            width:100%;
+            height:240px;
+            object-fit:cover;
+            display:block;
+            transition:.4s;
+        }
+
+        .card:hover img{
+            transform:scale(1.08);
+        }
+
+        .content{
+            padding:18px;
+        }
+
+        .content h3{
+            margin:0;
+            color:#00d4ff;
+        }
+
+        .content p{
+            color:#d7d7d7;
+            margin-top:10px;
+            line-height:1.6;
+        }
+
+        .back{
+            display:inline-block;
+            margin-top:25px;
+            padding:12px 28px;
+            background:#00d4ff;
+            color:#000;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:bold;
+            transition:.3s;
+        }
+
+        .back:hover{
+            background:white;
+        }
+
+        footer{
+            text-align:center;
+            padding:40px;
+            color:#aaa;
+        }
+    </style>
+</head>
+<body>
+
+<section class="gallery-header">
+
+    <h1>📸 Galeri Server</h1>
+
+    <p>
+        Kumpulan screenshot aktivitas pemain, event, mapping terbaru,
+        dan suasana Roleplay di My Sunshine Roleplay.
+    </p>
+
+    <a href="index.html" class="back">← Kembali ke Beranda</a>
+
+</section>
+
+<section class="gallery">
+
+    <div class="card">
+    <img src="https://i.imgur.com/nohaVn5.jpeg" alt="Balai Kota">
+    <div class="content">
+        <h3>🏛️ Balai Kota</h3>
+        <p>
+            Pusat administrasi kota tempat pemain mengurus berbagai keperluan dan pelayanan publik.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/jwoDTtU.jpeg" alt="Police Department">
+    <div class="content">
+        <h3>🚓 Police Department</h3>
+        <p>
+            Markas kepolisian yang menjadi pusat patroli, penegakan hukum, dan pelayanan keamanan kota.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/5Zu92oS.jpeg" alt="Rumah Sakit">
+    <div class="content">
+        <h3>🏥 Rumah Sakit</h3>
+        <p>
+            Fasilitas kesehatan bagi warga dan pemain yang membutuhkan perawatan maupun pertolongan medis.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/7qnPdOv.jpeg" alt="Mekanik">
+    <div class="content">
+        <h3>🔧 Bengkel Mekanik</h3>
+        <p>
+            Tempat perbaikan, modifikasi, dan perawatan kendaraan agar selalu siap digunakan.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/KWttT76.jpeg" alt="Workshop Boat">
+    <div class="content">
+        <h3>🚤 Workshop Boat</h3>
+        <p>
+            Area khusus untuk servis, perawatan, dan penyimpanan kapal yang digunakan di perairan kota.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/cNZTHLz.jpeg" alt="Terminal Bus">
+    <div class="content">
+        <h3>🚌 Terminal Bus</h3>
+        <p>
+            Pusat transportasi umum yang menghubungkan berbagai wilayah serta mendukung aktivitas Roleplay.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/MSpDOng.jpeg" alt="Bank Los Santos">
+    <div class="content">
+        <h3>🏦 Bank Los Santos</h3>
+        <p>
+            Pusat layanan keuangan tempat pemain menyimpan uang, melakukan transaksi, dan mengelola rekening dengan aman.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/38teH6Y.jpeg" alt="Karnaval">
+    <div class="content">
+        <h3>🎡 Karnaval</h3>
+        <p>
+            Area hiburan yang dipenuhi berbagai wahana dan menjadi lokasi favorit pemain untuk berkumpul serta menikmati suasana kota.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/ovd2mJ4.jpeg" alt="School Drive">
+    <div class="content">
+        <h3>🚗 School Drive</h3>
+        <p>
+            Tempat pemain mengikuti pelatihan mengemudi dan memperoleh Surat Izin Mengemudi (SIM) secara resmi.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/KsCDI31.jpeg" alt="Asuransi">
+    <div class="content">
+        <h3>🛡️ Asuransi</h3>
+        <p>
+            Kantor pelayanan asuransi yang membantu pemain mengurus perlindungan kendaraan dan berbagai layanan administrasi lainnya.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://i.imgur.com/fMSEZ3Z.jpeg" alt="Spawn Masuk Kota">
+    <div class="content">
+        <h3>🌆 Spawn Masuk Kota</h3>
+        <p>
+            Titik awal kedatangan pemain di kota, memberikan akses cepat untuk memulai petualangan dan aktivitas Roleplay.
+        </p>
+    </div>
+</div>
+
+</section>
+
+<footer>
+    © 2026 My Sunshine Roleplay • Official Gallery
+</footer>
+
+</body>
+</html>
