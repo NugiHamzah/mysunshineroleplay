@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Kota • My Sunshine Roleplay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: Poppins, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg,#07111f,#101f35,#081420);
+            color: white;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(20px);
+            background: rgba(0,0,0,.4);
+            border-bottom:1px solid rgba(255,255,255,.08);
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:15px 40px;
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:700;
+        }
+
+        .logo span{
+            color:#FFD54F;
+        }
+
+        .menu{
+            display:flex;
+            gap:20px;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            opacity:.8;
+        }
+
+        .menu a:hover{
+            opacity:1;
+        }
+
+        .container{
+
+            max-width:1300px;
+            margin:auto;
+            padding:40px 20px;
+
+            display:grid;
+            grid-template-columns:280px 1fr 300px;
+            gap:25px;
+
+        }
+
+        .card{
+
+            background:rgba(255,255,255,.05);
+            border:1px solid rgba(255,255,255,.08);
+            border-radius:18px;
+            backdrop-filter:blur(15px);
+            padding:20px;
+
+        }
+
+        .profile{
+            text-align:center;
+        }
+
+        .profile img{
+
+            width:90px;
+            height:90px;
+            border-radius:50%;
+            border:4px solid #FFD54F;
+
+        }
+
+        .profile h3{
+            margin:15px 0 5px;
+        }
+
+        .badge{
+            display:inline-block;
+            background:#FFD54F;
+            color:#000;
+            font-size:12px;
+            padding:4px 12px;
+            border-radius:30px;
+            font-weight:600;
+        }
+
+        .live-title{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+
+        }
+
+        .live{
+
+            color:#ff4f4f;
+            font-weight:bold;
+            animation:pulse 1s infinite;
+
+        }
+
+        @keyframes pulse{
+
+            50%{
+                opacity:.3;
+            }
+
+        }
+
+        textarea{
+
+            width:100%;
+            height:110px;
+            resize:none;
+            border:none;
+            outline:none;
+
+            border-radius:15px;
+
+            padding:15px;
+
+            background:#111e2e;
+            color:white;
+
+        }
+
+        .btn{
+
+            margin-top:15px;
+
+            border:none;
+
+            background:#FFD54F;
+
+            color:black;
+
+            font-weight:bold;
+
+            padding:12px 30px;
+
+            border-radius:30px;
+
+            cursor:pointer;
+
+        }
+
+        .post{
+
+            margin-top:25px;
+            border-top:1px solid rgba(255,255,255,.08);
+            padding-top:20px;
+
+        }
+
+        .post-header{
+
+            display:flex;
+            align-items:center;
+            gap:12px;
+
+        }
+
+        .post-header img{
+
+            width:55px;
+            height:55px;
+            border-radius:50%;
+
+        }
+
+        .post-name{
+
+            font-weight:600;
+
+        }
+
+        .time{
+
+            color:#aaa;
+            font-size:13px;
+
+        }
+
+        .post-body{
+
+            margin:15px 0;
+            line-height:1.7;
+
+        }
+
+        .actions{
+
+            display:flex;
+            gap:20px;
+            color:#FFD54F;
+            cursor:pointer;
+
+        }
+
+        .comment-box{
+
+            margin-top:20px;
+
+        }
+
+        .comment{
+
+            margin-top:15px;
+            padding:12px;
+            background:#13263d;
+            border-radius:10px;
+
+        }
+
+        .reply{
+
+            margin-left:40px;
+            margin-top:10px;
+            border-left:2px solid #FFD54F;
+            padding-left:15px;
+        }
+
+        .online{
+
+            display:flex;
+            align-items:center;
+            margin-bottom:15px;
+            gap:10px;
+        }
+
+        .dot{
+
+            width:10px;
+            height:10px;
+            background:#4cff4c;
+            border-radius:50%;
+
+        }
+
+        .server{
+
+            margin-top:20px;
+            line-height:2;
+        }
+
+        @media(max-width:1000px){
+
+            .container{
+                grid-template-columns:1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+<div class="logo">
+
+☀️ <span>My Sunshine</span> Roleplay
+
+</div>
+
+<div class="menu">
+
+<a href="index.html">Home</a>
+<a href="updates.html">Updates</a>
+<a href="event.html">Event</a>
+<a href="pengumuman.html">Pengumuman</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="card profile">
+
+<img id="profilePhoto"
+src="https://ui-avatars.com/api/?name=Player">
+
+<h3 id="profileName">
+Belum Login
+</h3>
+
+<div class="badge">
+Verified Player
+</div>
+
+<hr>
+
+<div class="server">
+
+<b>Total Post</b>
+
+<h2 id="totalPost">0</h2>
+
+<b>Total Komentar</b>
+
+<h2 id="totalComment">0</h2>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="card">
+
+<div class="live-title">
+
+<h2>
+
+🏙 Live Kota
+
+</h2>
+
+<div class="live">
+
+🔴 LIVE
+
+</div>
+
+</div>
+
+<textarea
+id="postInput"
+placeholder="Apa yang sedang terjadi di Kota My Sunshine Roleplay...?"></textarea>
+
+<button
+class="btn"
+id="postButton">
+
+Posting Sekarang
+
+</button>
+
+</div>
+
+<div id="feed">
+
+<div class="card post">
+
+<div class="post-header">
+
+<img
+src="https://ui-avatars.com/api/?name=Admin">
+
+<div>
+
+<div class="post-name">
+
+My Sunshine Staff 👑
+
+</div>
+
+<div class="time">
+
+5 menit lalu
+
+</div>
+
+</div>
+
+</div>
+
+<div class="post-body">
+
+Selamat datang di Live Kota!
+
+Gunakan halaman ini untuk berbagi aktivitas RP, event, screenshot, maupun informasi terbaru.
+
+Harap menjaga etika dalam berkomentar.
+
+</div>
+
+<div class="actions">
+
+<div>❤️ 18</div>
+
+<div>💬 Balas</div>
+
+<div style="color:#ff5f5f">
+🗑 Hapus
+</div>
+
+</div>
+
+<div class="comment-box">
+
+<div class="comment">
+
+<b>ADMIN SUNSHINE</b>
+
+<br>
+
+Mantap min 🔥
+
+</div>
+
+<div class="reply">
+
+<b>Staff</b>
+
+<br>
+
+Terima kasih 🙏
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+📊 Status Server
+
+</h3>
+
+<div class="online">
+
+<div class="dot"></div>
+
+Online
+
+</div>
+
+<p>
+
+👥 Player Online
+
+<br>
+
+<b id="players">
+Loading...
+</b>
+
+</p>
+
+<p>
+
+🕒 Uptime
+
+<br>
+
+<b id="uptime">
+Loading...
+</b>
+
+</p>
+
+<hr>
+
+<h3>
+
+🔥 Aktivitas Terbaru
+
+</h3>
+
+<ul id="activity">
+
+<li>Belum ada aktivitas.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<script src="live.js"></script>
+
+</body>
+
+</html>

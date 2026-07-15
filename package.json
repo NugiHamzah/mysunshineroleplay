@@ -1,18 +1,17 @@
 {
-  "name": "my-sunshine-roleplay",
-  "version": "1.0.0",
-  "description": "My Sunshine Roleplay Website with Sunshine AI",
+  "name": "mysunshine-roleplay",
+  "version": "2.0.0",
+  "description": "Official Website My Sunshine Roleplay",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "axios": "^1.18.1",
-    "cors": "^2.8.6",
-    "dgram": "^1.0.1",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "samp-query": "^0.1.5"
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0"
   }
 }

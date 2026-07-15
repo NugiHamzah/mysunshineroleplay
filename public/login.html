@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login • My Sunshine Roleplay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at top left, #2b7fff33, transparent 35%),
+                radial-gradient(circle at bottom right, #ffd54f22, transparent 35%),
+                linear-gradient(135deg, #081320, #101d31, #07111d);
+            overflow: hidden;
+        }
+
+        .bg-blur {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            background: #FFD54F33;
+            top: -100px;
+            left: -100px;
+        }
+
+        .bg-blur2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            background: #2196F333;
+            bottom: -120px;
+            right: -120px;
+        }
+
+        .login-card {
+
+            position: relative;
+            z-index: 5;
+
+            width: 430px;
+            max-width: 95%;
+
+            padding: 40px;
+
+            background: rgba(255,255,255,.05);
+
+            backdrop-filter: blur(18px);
+
+            border:1px solid rgba(255,255,255,.08);
+
+            border-radius:25px;
+
+            text-align:center;
+
+            color:white;
+
+            box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+        }
+
+        .logo{
+
+            font-size:65px;
+
+        }
+
+        h1{
+
+            margin-top:15px;
+            font-size:30px;
+
+        }
+
+        p{
+
+            color:#b8c0d0;
+            margin-top:10px;
+            line-height:1.7;
+
+        }
+
+        .google-btn{
+
+            width:100%;
+
+            margin-top:35px;
+
+            border:none;
+
+            background:white;
+
+            color:#222;
+
+            padding:15px;
+
+            border-radius:50px;
+
+            cursor:pointer;
+
+            font-size:16px;
+
+            font-weight:600;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:15px;
+
+            transition:.3s;
+
+        }
+
+        .google-btn:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+        }
+
+        .google-btn img{
+
+            width:25px;
+
+        }
+
+        .guest-btn{
+
+            width:100%;
+
+            margin-top:15px;
+
+            background:#FFD54F;
+
+            color:#000;
+
+            border:none;
+
+            padding:15px;
+
+            border-radius:50px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:.3s;
+
+        }
+
+        .guest-btn:hover{
+
+            transform:translateY(-2px);
+
+        }
+
+        .features{
+
+            margin-top:35px;
+
+            text-align:left;
+
+            color:#ddd;
+
+            font-size:14px;
+
+        }
+
+        .features div{
+
+            margin-bottom:12px;
+
+        }
+
+        .footer{
+
+            margin-top:30px;
+
+            font-size:12px;
+
+            color:#999;
+
+        }
+
+        a{
+
+            color:#FFD54F;
+
+            text-decoration:none;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="bg-blur"></div>
+<div class="bg-blur2"></div>
+
+<div class="login-card">
+
+<div class="logo">
+☀️
+</div>
+
+<h1>Selamat datang di My Sunshine Roleplay!</h1>
+
+<p>
+Senang sekali melihatmu di sini! Di bawah sinar hangat kota kita, lembaran cerita baru menantimu. 
+Kamu sudah berada di tempat yang tepat untuk mengekspresikan imajinasi dan membangun koneksi baru.
+</p>
+
+<button class="google-btn" id="googleLogin">
+
+<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+
+<span>Login dengan Google</span>
+
+</button>
+
+<button class="guest-btn" onclick="location.href='index.html'">
+
+Masuk Sebagai Pengunjung
+
+</button>
+
+<div class="features">
+
+<div>✨ Akses ke kota virtual yang hidup</div>
+<div>✨ Update rutin dan event menarik</div>
+
+</div>
+
+<div class="footer">
+
+Dengan login, Anda menyetujui aturan server <br>
+
+<a href="pengumuman.html">
+
+My Sunshine Roleplay
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Firebase -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+
+getAuth,
+
+GoogleAuthProvider,
+
+signInWithPopup
+
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBZ-EcUgi2570KS-pos8wK0smxFOuFMUjw",
+
+authDomain: "mysunshineroleplay.firebaseapp.com",
+
+projectId: "mysunshineroleplay",
+
+storageBucket: "mysunshineroleplay.firebasestorage.app",
+
+messagingSenderId: "441072977699",
+
+appId: "1:441072977699:web:769b05865f434111d26e96"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+document.getElementById("googleLogin").onclick = async ()=>{
+
+try{
+
+const result = await signInWithPopup(auth,provider);
+
+const user = result.user;
+
+localStorage.setItem("user",JSON.stringify({
+
+uid:user.uid,
+
+name:user.displayName,
+
+photo:user.photoURL,
+
+email:user.email
+
+}));
+
+window.location.href="live.html";
+
+}catch(err){
+
+alert(err.message);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
