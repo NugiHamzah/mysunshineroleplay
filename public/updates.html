@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates - My Sunshine Roleplay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon">☀️</div>
+            <div>
+                <h2>My Sunshine Roleplay</h2>
+                <span>Official Website</span>
+            </div>
+        </div>
+        <nav>
+            <a href="index.html">Back to Home</a>
+        </nav>
+    </header>
+
+<section style="margin-top: 100px; padding: 40px; color: white; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">📋 Changelog v1.1.8 — Fortified</h2>
+
+    <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 30px; text-align: left;">
+
+        <h3 style="color:#4CAF50;">🆕 Added</h3>
+        <ul style="line-height: 1.8;">
+
+            <li>
+                <strong>Flare Multi-Warna <code>/flare</code></strong> —
+                Perintah <code>/flare</code> kini memiliki pilihan <strong>3 warna</strong>:
+                <strong>Merah</strong> (backup umum),
+                <strong>Biru</strong> (prioritas),
+                dan <strong>Hijau</strong> (aman).
+                Flare juga sekarang terlihat dan terkirim ke seluruh faction pemerintah
+                (SAPD, SAGS, SAMD, dan SANEWS).
+            </li>
+
+            <li>
+                <strong>Sharekey Kendaraan <code>/sharekey</code></strong> —
+                Pemilik kendaraan pribadi kini dapat membagikan akses kunci kepada pemain lain menggunakan
+                <code>/sharekey [playerid]</code>.
+                Pemegang kunci dapat membuka/mengunci kendaraan serta menyalakan mesin.
+                Kendaraan yang sedang terkunci kini tidak dapat dinaiki maupun dinyalakan oleh pemain lain.
+            </li>
+
+            <li>
+                <strong>Damage Log</strong> —
+                Setiap tembakan senjata api kini mencatat identitas penembak.
+                Informasi tersebut dapat dilihat melalui <code>/damagelog</code> (kolom <strong>Shooter</strong>)
+                maupun oleh tim medis melalui perintah <code>/surgery</code>.
+            </li>
+
+        </ul>
+
+        <hr style="margin:25px 0; border-color:rgba(255,255,255,0.15);">
+
+        <h3 style="color:#FFD54F;">🛠️ Fixed</h3>
+        <ul style="line-height: 1.8;">
+
+            <li>
+                <strong>Radio Faction SAMD &amp; SANEWS</strong> —
+                Anggota SAMD dan SANEWS kini kembali menerima seluruh pesan radio faction
+                (<code>/r</code>, <code>/or</code>, <code>/od</code>, dan <code>/d</code>)
+                dengan normal, termasuk saat sedang off-duty.
+            </li>
+
+            <li>
+                <strong>Pesan Radio Mati</strong> —
+                Saat radio dalam keadaan mati, penggunaan <code>/r</code> kini akan memberikan
+                petunjuk untuk menyalakan radio kembali dalam Bahasa Indonesia.
+            </li>
+
+            <li>
+                <strong>Departemen <code>/d</code></strong> —
+                Perintah <code>/d</code> kini dapat digunakan lintas seluruh faction pemerintah
+                (SAPD, SAGS, SAMD, dan SANEWS), bukan hanya antar anggota faction yang sama.
+            </li>
+
+        </ul>
+
+        <hr style="margin:25px 0; border-color:rgba(255,255,255,0.15);">
+
+        <h3 style="color:#64B5F6;">📝 Catatan</h3>
+
+        <blockquote style="
+            margin-top:15px;
+            padding:15px 20px;
+            border-left:4px solid #00E5FF;
+            background:rgba(255,255,255,0.05);
+            font-style:italic;
+            color:#ddd;
+        ">
+            "v1.1.8 — Radio faction SAMD &amp; SANEWS telah diperbaiki, komunikasi <code>/d</code> kini lintas seluruh faction pemerintah, sistem flare mendapatkan 3 pilihan warna, fitur Sharekey kendaraan ditambahkan untuk meningkatkan keamanan kendaraan pribadi, serta Damage Log kini mencatat nama penembak secara lengkap."
+        </blockquote>
+
+    </div>
+</section>
+
+    <section style="margin-top: 100px; padding: 40px; color: white; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">📋 Changelog v1.1.7 — Stabilitas</h2>
+
+    <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 30px; text-align: left;">
+
+        <h3 style="color:#4CAF50;">🆕 Added</h3>
+        <ul style="line-height: 1.8;">
+            <li>
+                <strong>Pertolongan Pertama <code>/salve</code></strong> —
+                Tim EMS sekarang bisa memberikan pertolongan pertama kepada warga yang terluka tanpa membutuhkan medkit.
+            </li>
+        </ul>
+
+        <hr style="margin:25px 0; border-color:rgba(255,255,255,0.15);">
+
+        <h3 style="color:#FFD54F;">🛠️ Fixed</h3>
+        <ul style="line-height: 1.8;">
+            <li>
+                <strong>Dealer Lowrider</strong> —
+                Kendaraan lowrider (Blade, Broadway, Hermes, Savanna, dan lainnya) sekarang sudah dapat dibeli melalui dealer lowrider.
+            </li>
+
+            <li>
+                <strong>Furniture Rumah Hilang</strong> —
+                Furniture dan dekorasi rumah yang dipasang melalui <code>/dyoh</code> kini tidak akan hilang lagi setelah server restart.
+            </li>
+
+            <li>
+                <strong>Mancing di Perairan</strong> —
+                Pemain kini dapat memancing di laut selama berada dekat kapal dan berada di area mancing, tidak hanya di area karnaval.
+            </li>
+
+            <li>
+                <strong>Skill Trucker</strong> —
+                Skill trucker sekarang dapat meningkat hingga level 5 dengan normal. Sebelumnya hanya berhenti di level 2.
+            </li>
+
+            <li>
+                <strong>Locker Faction Bank</strong> —
+                Sistem deposit uang pada locker faction (SAPD, SAGS, SAMD, dan SANEWS) kini kembali berfungsi dengan normal.
+            </li>
+
+            <li>
+                <strong>Skin Locker SANEWS</strong> —
+                Karakter pria di faction SANEWS kini memiliki pilihan skin yang sesuai di locker.
+            </li>
+        </ul>
+
+        <hr style="margin:25px 0; border-color:rgba(255,255,255,0.15);">
+
+        <h3 style="color:#64B5F6;">📝 Catatan</h3>
+
+        <blockquote style="
+            margin-top:15px;
+            padding:15px 20px;
+            border-left:4px solid #00E5FF;
+            background:rgba(255,255,255,0.05);
+            font-style:italic;
+            color:#ddd;
+        ">
+            "v1.1.7 — update stabilitas: perbaikan dealer lowrider, furniture rumah, mancing, skill trucker, locker faction, dan skin SANEWS."
+        </blockquote>
+
+    </div>
+</section>
+
+    <section style="margin-top: 100px; padding: 40px; color: white; text-align: center;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Update Terbaru</h2>
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h3>📢 INFO UPDATE WEBSITE</h3>
+            <h3>Halo semuanya</h3>
+            <ul style="text-align: left; margin-top: 20px;">
+                <li>Sekarang sistem Invite dan beberapa fitur lainnya sudah tersedia di Website Resmi.
+                    Kalian juga bisa langsung cek jumlah player/server status melalui website tanpa perlu ribet menggunakan link tambahan lagi. ✅
+
+                    Semua dibuat lebih mudah, aman, dan praktis untuk seluruh player. 🚀
+
+                    Terima kasih atas support kalian 🙏.</li>
+                    My Sunshine Roleplay Team</em></li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
