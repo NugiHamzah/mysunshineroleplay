@@ -11,7 +11,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 import {
-    getFirestore
+    getFirestore,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 import {
@@ -19,23 +20,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js";
 
 // ==========================================
-// Firebase Config
+// GANTI DENGAN CONFIG FIREBASE KAMU
 // ==========================================
 
 const firebaseConfig = {
-
     apiKey: "AIzaSyBZ-EcUgi2570KS-pos8wK0smxFOuFMUjw",
-
     authDomain: "mysunshineroleplay.firebaseapp.com",
-
     projectId: "mysunshineroleplay",
-
     storageBucket: "mysunshineroleplay.firebasestorage.app",
-
     messagingSenderId: "441072977699",
-
     appId: "1:441072977699:web:769b05865f434111d26e96"
-
 };
 
 // ==========================================
@@ -45,25 +39,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // ==========================================
-// Services
+// Authentication
 // ==========================================
 
-export const auth = getAuth(app);
+const auth = getAuth(app);
 
-export const db = getFirestore(app);
-
-export const storage = getStorage(app);
-
-// ==========================================
-// Providers
-// ==========================================
-
-export const googleProvider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-
     prompt: "select_account"
-
 });
 
-export default app;
+// ==========================================
+// Firestore
+// ==========================================
+
+const db = getFirestore(app);
+
+// ==========================================
+// Storage
+// ==========================================
+
+const storage = getStorage(app);
+
+// ==========================================
+// Export
+// ==========================================
+
+export {
+    auth,
+    db,
+    storage,
+    googleProvider,
+    serverTimestamp
+};

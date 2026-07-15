@@ -2,342 +2,328 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login • My Sunshine Roleplay</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Login • My Sunshine Roleplay</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background:
-                radial-gradient(circle at top left, #2b7fff33, transparent 35%),
-                radial-gradient(circle at bottom right, #ffd54f22, transparent 35%),
-                linear-gradient(135deg, #081320, #101d31, #07111d);
-            overflow: hidden;
-        }
+<style>
 
-        .bg-blur {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(120px);
-            background: #FFD54F33;
-            top: -100px;
-            left: -100px;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
 
-        .bg-blur2 {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(120px);
-            background: #2196F333;
-            bottom: -120px;
-            right: -120px;
-        }
+body{
 
-        .login-card {
+min-height:100vh;
 
-            position: relative;
-            z-index: 5;
+display:flex;
 
-            width: 430px;
-            max-width: 95%;
+justify-content:center;
 
-            padding: 40px;
+align-items:center;
 
-            background: rgba(255,255,255,.05);
+background:linear-gradient(135deg,#07111f,#0d1d32,#081421);
 
-            backdrop-filter: blur(18px);
+color:white;
 
-            border:1px solid rgba(255,255,255,.08);
+overflow:hidden;
 
-            border-radius:25px;
+}
 
-            text-align:center;
+.card{
 
-            color:white;
+width:430px;
 
-            box-shadow:0 20px 50px rgba(0,0,0,.3);
+max-width:95%;
 
-        }
+padding:40px;
 
-        .logo{
+background:rgba(255,255,255,.05);
 
-            font-size:65px;
+border-radius:25px;
 
-        }
+border:1px solid rgba(255,255,255,.08);
 
-        h1{
+backdrop-filter:blur(18px);
 
-            margin-top:15px;
-            font-size:30px;
+text-align:center;
 
-        }
+box-shadow:0 20px 40px rgba(0,0,0,.35);
 
-        p{
+}
 
-            color:#b8c0d0;
-            margin-top:10px;
-            line-height:1.7;
+.logo{
 
-        }
+font-size:65px;
 
-        .google-btn{
+margin-bottom:15px;
 
-            width:100%;
+}
 
-            margin-top:35px;
+h1{
 
-            border:none;
+margin-bottom:10px;
 
-            background:white;
+}
 
-            color:#222;
+p{
 
-            padding:15px;
+color:#bbb;
 
-            border-radius:50px;
+line-height:1.7;
 
-            cursor:pointer;
+margin-bottom:30px;
 
-            font-size:16px;
+}
 
-            font-weight:600;
+button{
 
-            display:flex;
+width:100%;
 
-            align-items:center;
+padding:15px;
 
-            justify-content:center;
+border:none;
 
-            gap:15px;
+border-radius:50px;
 
-            transition:.3s;
+cursor:pointer;
 
-        }
+font-size:16px;
 
-        .google-btn:hover{
+font-weight:bold;
 
-            transform:translateY(-2px);
+transition:.3s;
 
-            box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
 
-        }
+#login{
 
-        .google-btn img{
+background:#fff;
 
-            width:25px;
+color:#222;
 
-        }
+display:flex;
 
-        .guest-btn{
+justify-content:center;
 
-            width:100%;
+align-items:center;
 
-            margin-top:15px;
+gap:12px;
 
-            background:#FFD54F;
+}
 
-            color:#000;
+#login:hover{
 
-            border:none;
+transform:translateY(-2px);
 
-            padding:15px;
+}
 
-            border-radius:50px;
+#guest{
 
-            font-weight:bold;
+margin-top:15px;
 
-            cursor:pointer;
+background:#FFD54F;
 
-            transition:.3s;
+color:#000;
 
-        }
+}
 
-        .guest-btn:hover{
+img{
 
-            transform:translateY(-2px);
+width:24px;
 
-        }
+}
 
-        .features{
+.footer{
 
-            margin-top:35px;
+margin-top:30px;
 
-            text-align:left;
+font-size:12px;
 
-            color:#ddd;
+color:#888;
 
-            font-size:14px;
+}
 
-        }
-
-        .features div{
-
-            margin-bottom:12px;
-
-        }
-
-        .footer{
-
-            margin-top:30px;
-
-            font-size:12px;
-
-            color:#999;
-
-        }
-
-        a{
-
-            color:#FFD54F;
-
-            text-decoration:none;
-
-        }
-
-    </style>
+</style>
 
 </head>
 
 <body>
 
-<div class="bg-blur"></div>
-<div class="bg-blur2"></div>
-
-<div class="login-card">
+<div class="card">
 
 <div class="logo">
+
 ☀️
+
 </div>
 
-<h1>Selamat datang di My Sunshine Roleplay!</h1>
+<h1>
+
+My Sunshine Roleplay
+
+</h1>
 
 <p>
-Senang sekali melihatmu di sini! Di bawah sinar hangat kota kita, lembaran cerita baru menantimu. 
-Kamu sudah berada di tempat yang tepat untuk mengekspresikan imajinasi dan membangun koneksi baru.
+
+Masuk menggunakan akun Google untuk menikmati fitur Live Kota, komentar realtime, profile pemain, event, dan berbagai fitur komunitas lainnya.
+
 </p>
 
-<button class="google-btn" id="googleLogin">
+<button id="login">
 
 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
 
-<span>Login dengan Google</span>
+Login dengan Google
 
 </button>
 
-<button class="guest-btn" onclick="location.href='index.html'">
+<button id="guest">
 
 Masuk Sebagai Pengunjung
 
 </button>
 
-<div class="features">
-
-<div>✨ Akses ke kota virtual yang hidup</div>
-<div>✨ Update rutin dan event menarik</div>
-
-</div>
-
 <div class="footer">
 
-Dengan login, Anda menyetujui aturan server <br>
-
-<a href="pengumuman.html">
-
-My Sunshine Roleplay
-
-</a>
+© 2026 My Sunshine Roleplay
 
 </div>
 
 </div>
 
-<!-- Firebase -->
 <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 
 import {
 
-getAuth,
+auth,
+db,
+googleProvider
 
-GoogleAuthProvider,
+} from "./firebase.js";
 
-signInWithPopup
+import {
+
+signInWithPopup,
+onAuthStateChanged
 
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-const firebaseConfig = {
+import {
 
-apiKey: "AIzaSyBZ-EcUgi2570KS-pos8wK0smxFOuFMUjw",
+doc,
+getDoc,
+setDoc,
+serverTimestamp
 
-authDomain: "mysunshineroleplay.firebaseapp.com",
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-projectId: "mysunshineroleplay",
+// ======================================
+// Sudah Login?
+// ======================================
 
-storageBucket: "mysunshineroleplay.firebasestorage.app",
+onAuthStateChanged(auth,(user)=>{
 
-messagingSenderId: "441072977699",
+    if(user){
 
-appId: "1:441072977699:web:769b05865f434111d26e96"
+        location.href="live.html";
 
-};
+    }
 
-const app = initializeApp(firebaseConfig);
+});
 
-const auth = getAuth(app);
+// ======================================
+// Login Google
+// ======================================
 
-const provider = new GoogleAuthProvider();
-
-document.getElementById("googleLogin").onclick = async ()=>{
+document.getElementById("login").onclick=async()=>{
 
 try{
 
-const result = await signInWithPopup(auth,provider);
+const result=await signInWithPopup(
 
-const user = result.user;
+auth,
 
-localStorage.setItem("user",JSON.stringify({
+googleProvider
+
+);
+
+const user=result.user;
+
+const ref=doc(
+
+db,
+
+"users",
+
+user.uid
+
+);
+
+const snap=await getDoc(ref);
+
+if(!snap.exists()){
+
+await setDoc(ref,{
 
 uid:user.uid,
 
 name:user.displayName,
 
+email:user.email,
+
 photo:user.photoURL,
 
-email:user.email
+role:"player",
 
-}));
+verified:true,
 
-window.location.href="live.html";
+createdAt:serverTimestamp(),
+
+lastLogin:serverTimestamp()
+
+});
+
+}else{
+
+await setDoc(ref,{
+
+lastLogin:serverTimestamp()
+
+},{merge:true});
+
+}
+
+location.href="live.html";
 
 }catch(err){
 
-alert(err.message);
+console.error(err);
+
+alert("Login gagal.\n\n"+err.message);
 
 }
 
-}
+};
+
+// ======================================
+// Guest
+// ======================================
+
+document.getElementById("guest").onclick=()=>{
+
+location.href="index.html";
+
+};
 
 </script>
 
