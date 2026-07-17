@@ -4,6 +4,9 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
+const axios = require("axios");
+const multer = require("multer");
+const FormData = require("form-data");
 const querySamp = require("./samp");
 
 const app = express();
@@ -12,6 +15,158 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+/******************************************
+ * Upload Report
+ ******************************************/
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 25 * 1024 * 1024 // 25MB
+    }
+});
+
+/* ==========================================
+   HOME & START SERVER
+========================================== */
+
+/* ==========================================
+   REPORT WEBHOOK
+========================================== */
+
+app.post("/api/report", upload.single("bukti"), async (req, res) => {
+
+    try {
+
+        const {
+            ucp,
+            ic,
+            kategori,
+            laporan
+        } = req.body;
+
+        if (!ucp || !ic || !laporan) {
+            return res.json({
+                success: false,
+                message: "Data belum lengkap."
+            });
+        }
+
+        const now = new Date();
+
+        const tanggal = now.toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
+
+        const jam = now.toLocaleTimeString("id-ID", {
+            hour12: false,
+            timeZone: "Asia/Jakarta"
+        });
+
+        const form = new FormData();
+
+        form.append(
+            "payload_json",
+            JSON.stringify({
+
+                embeds: [
+
+                    {
+
+                        color: 0xFFD700,
+
+                        title: "📢 REPORT BARU",
+
+                        fields: [
+
+                            {
+                                name: "👤 Nama UCP",
+                                value: ucp,
+                                inline: true
+                            },
+
+                            {
+                                name: "🎭 Nama IC",
+                                value: ic,
+                                inline: true
+                            },
+
+                            {
+                                name: "📂 Kategori",
+                                value: kategori || "-",
+                                inline: false
+                            },
+
+                            {
+                                name: "📝 Isi Laporan",
+                                value: laporan,
+                                inline: false
+                            },
+
+                            {
+                                name: "📅 Tanggal",
+                                value: tanggal,
+                                inline: true
+                            },
+
+                            {
+                                name: "🕒 Jam",
+                                value: jam + " WIB",
+                                inline: true
+                            }
+
+                        ],
+
+                        footer: {
+                            text: "My Sunshine Roleplay Report System"
+                        },
+
+                        timestamp: new Date().toISOString()
+
+                    }
+
+                ]
+
+            })
+        );
+
+        if (req.file) {
+
+            form.append(
+                "file",
+                req.file.buffer,
+                req.file.originalname
+            );
+
+        }
+
+        await axios.post(
+            process.env.DISCORD_WEBHOOK,
+            form,
+            {
+                headers: form.getHeaders()
+            }
+        );
+
+        res.json({
+            success: true
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Webhook gagal dikirim."
+        });
+
+    }
+
+});
 
 /* ==========================================
    TRACKING DURASI PEMAIN
