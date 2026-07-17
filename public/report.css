@@ -1,0 +1,397 @@
+/* ==========================================
+   My Sunshine Roleplay
+   Report Page
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+
+    --gold:#FFD700;
+    --gold2:#ffb300;
+
+    --bg:#0d0d0d;
+    --card:#171717;
+    --card2:#202020;
+
+    --text:#ffffff;
+    --text2:#bdbdbd;
+
+}
+
+body{
+
+    background:
+    radial-gradient(circle at top,#2d2200 0%,transparent 40%),
+    linear-gradient(135deg,#090909,#121212,#191919);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.container{
+
+    width:100%;
+    max-width:760px;
+
+    background:var(--card);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,215,0,.15);
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,.45),
+    0 0 25px rgba(255,215,0,.08);
+
+}
+
+.header{
+
+    background:linear-gradient(90deg,var(--gold),var(--gold2));
+
+    color:#111;
+
+    padding:30px;
+
+    text-align:center;
+
+}
+
+.header h1{
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+.header p{
+
+    margin-top:6px;
+
+    opacity:.8;
+
+}
+
+form{
+
+    padding:35px;
+
+}
+
+.group{
+
+    margin-bottom:22px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.required{
+
+    color:#ff5555;
+
+}
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    background:var(--card2);
+
+    border:1px solid transparent;
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:0 0 15px rgba(255,215,0,.2);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:180px;
+
+}
+
+.upload{
+
+    border:2px dashed rgba(255,215,0,.6);
+
+    border-radius:15px;
+
+    text-align:center;
+
+    padding:35px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    background:#111;
+
+}
+
+.upload:hover{
+
+    background:#1b1b1b;
+
+    transform:scale(1.01);
+
+}
+
+.upload input{
+
+    display:none;
+
+}
+
+.upload-icon{
+
+    font-size:48px;
+
+    color:var(--gold);
+
+}
+
+.upload h3{
+
+    margin-top:12px;
+
+}
+
+.upload p{
+
+    color:var(--text2);
+
+    margin-top:8px;
+
+    font-size:14px;
+
+}
+
+.preview{
+
+    margin-top:25px;
+
+    text-align:center;
+
+}
+
+.preview img{
+
+    width:100%;
+
+    max-height:420px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,215,0,.15);
+
+}
+
+.preview video{
+
+    width:100%;
+
+    border-radius:15px;
+
+}
+
+.info{
+
+    margin-top:15px;
+
+    color:#888;
+
+    font-size:13px;
+
+    text-align:center;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:17px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    background:linear-gradient(90deg,var(--gold),var(--gold2));
+
+    color:#111;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 25px rgba(255,215,0,.35);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+.footer{
+
+    background:#101010;
+
+    text-align:center;
+
+    padding:18px;
+
+    color:#888;
+
+    font-size:13px;
+
+}
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--gold);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#777;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+body{
+
+padding:15px;
+
+}
+
+.container{
+
+border-radius:15px;
+
+}
+
+.header{
+
+padding:22px;
+
+}
+
+.header h1{
+
+font-size:25px;
+
+}
+
+form{
+
+padding:20px;
+
+}
+
+.upload{
+
+padding:25px;
+
+}
+
+.upload-icon{
+
+font-size:38px;
+
+}
+
+button{
+
+font-size:16px;
+
+}
+
+}

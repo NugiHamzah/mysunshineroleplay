@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Sunshine Roleplay - Report</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0d0d0d,#161616,#1b1b1b);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:40px;
+}
+
+.container{
+    width:100%;
+    max-width:750px;
+    background:#151515;
+    border:1px solid rgba(255,215,0,.25);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 0 40px rgba(0,0,0,.5);
+}
+
+.header{
+    background:linear-gradient(90deg,#FFD700,#ffb300);
+    color:#111;
+    padding:25px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:30px;
+}
+
+.header p{
+    margin-top:5px;
+    font-size:14px;
+}
+
+form{
+    padding:35px;
+}
+
+.group{
+    margin-bottom:22px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+    padding:14px;
+
+    border:none;
+    outline:none;
+
+    background:#242424;
+
+    color:white;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.25s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    border:1px solid gold;
+
+    box-shadow:0 0 15px rgba(255,215,0,.35);
+
+}
+
+textarea{
+
+    resize:vertical;
+    min-height:160px;
+
+}
+
+.upload{
+
+    border:2px dashed #FFD700;
+    border-radius:12px;
+    padding:30px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+.upload:hover{
+
+    background:#1d1d1d;
+
+}
+
+.upload input{
+
+    display:none;
+
+}
+
+.preview{
+
+    margin-top:20px;
+    text-align:center;
+
+}
+
+.preview img{
+
+    max-width:100%;
+    border-radius:12px;
+
+}
+
+.preview video{
+
+    width:100%;
+    border-radius:12px;
+
+}
+
+.info{
+
+    margin-top:10px;
+    font-size:14px;
+    color:#aaa;
+
+}
+
+button{
+
+    width:100%;
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#FFD700,#ffae00);
+
+    color:#111;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 0 25px rgba(255,215,0,.4);
+
+}
+
+.footer{
+
+    text-align:center;
+    padding:15px;
+    background:#101010;
+    color:#777;
+    font-size:13px;
+
+}
+
+.required{
+
+    color:#ff4d4d;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>📢 Report Player</h1>
+
+<p>My Sunshine Roleplay Official Website</p>
+
+<a href="index.html" class="back-btn">
+            <i class="fa-solid fa-house"></i>
+            Kembali ke Beranda
+</a>
+
+</div>
+
+<form id="reportForm">
+
+<div class="group">
+
+<label>Nama UCP <span class="required">*</span></label>
+
+<input
+type="text"
+name="ucp"
+placeholder="Masukkan Nama UCP"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Nama IC <span class="required">*</span></label>
+
+<input
+type="text"
+name="ic"
+placeholder="Masukkan Nama IC"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Jenis Report</label>
+
+<select name="kategori">
+
+<option>DM</option>
+
+<option>RK</option>
+
+<option>PG</option>
+
+<option>MG</option>
+
+<option>Cheating</option>
+
+<option>Bug Abuse</option>
+
+<option>Lainnya</option>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>Isi Laporan</label>
+
+<textarea
+name="laporan"
+placeholder="Jelaskan laporan secara lengkap..."
+required></textarea>
+
+</div>
+
+<div class="group">
+
+<label>Upload Bukti</label>
+
+<label class="upload">
+
+📷 Klik disini untuk Upload Foto / Video
+
+<input
+type="file"
+id="file"
+name="bukti"
+accept="image/*,video/*">
+
+</label>
+
+<div class="preview" id="preview"></div>
+
+<div class="info">
+
+Format:
+JPG • PNG • MP4 • MOV
+
+</div>
+
+</div>
+
+<button type="submit">
+
+🚀 Kirim Report
+
+</button>
+
+</form>
+
+<div class="footer">
+
+© 2026 My Sunshine Roleplay
+
+</div>
+
+</div>
+
+<script>
+
+const file=document.getElementById("file");
+const preview=document.getElementById("preview");
+
+file.onchange=()=>{
+
+preview.innerHTML="";
+
+const f=file.files[0];
+
+if(!f)return;
+
+const url=URL.createObjectURL(f);
+
+if(f.type.startsWith("image")){
+
+preview.innerHTML=`
+<img src="${url}">
+`;
+
+}else{
+
+preview.innerHTML=`
+<video controls src="${url}"></video>
+`;
+
+}
+
+}
+
+document.getElementById("reportForm").onsubmit=async(e)=>{
+
+e.preventDefault();
+
+const form=new FormData(e.target);
+
+try{
+
+const res=await fetch("/api/report",{
+
+method:"POST",
+
+body:form
+
+});
+
+const data=await res.json();
+
+if(data.success){
+
+alert("Report berhasil dikirim!");
+
+e.target.reset();
+
+preview.innerHTML="";
+
+}else{
+
+alert(data.message);
+
+}
+
+}catch{
+
+alert("Server Error");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
