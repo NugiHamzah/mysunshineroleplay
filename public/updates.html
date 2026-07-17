@@ -20,8 +20,107 @@
         <nav>
             <a href="index.html">Back to Home</a>
         </nav>
-    </header>
+    </header>   
 
+<section style="margin-top: 100px; padding: 40px; color: white; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">📋 Changelog v1.1.11 — Stability Update</h2>
+
+    <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 30px; text-align: left;">
+
+        <h3 style="color:#E57373;">🐞 Fixed</h3>
+        <ul style="line-height: 1.9;">
+
+            <li>
+                <strong>Kendaraan Warga Tidak Bisa Dinaiki</strong> —
+                Memperbaiki bug yang menyebabkan sebagian kendaraan pribadi tidak dapat dinaiki akibat
+                sistem salah mengenali nilai <strong>kosong/netral</strong>. Validasi telah dioptimalkan
+                agar masalah ini tidak kembali terjadi.
+            </li>
+
+            <li>
+                <strong>Kendaraan Masuk Asuransi Saat Logout</strong> —
+                Memperbaiki bug yang menyebabkan kendaraan pemain otomatis masuk ke sistem asuransi
+                ketika pemain logout. Penyebabnya adalah kendaraan tidak tercatat dengan benar saat
+                player keluar sehingga dianggap hancur oleh server. Sistem telah diperbaiki dan
+                masih akan terus dipantau pada update berikutnya.
+            </li>
+
+            <li>
+                <strong>Duplikasi Kendaraan</strong> —
+                Mengoptimalkan sistem validasi kendaraan untuk menutup celah yang dapat menyebabkan
+                kendaraan terduplikasi (duplicate vehicle). Data kendaraan lama yang terdampak akan
+                dibersihkan secara manual melalui database apabila masih ditemukan.
+            </li>
+
+            <li>
+                <strong>Job Sweeper & Courier</strong> —
+                Memperbaiki bug yang membuat pemain tidak dapat menyalakan kendaraan job
+                <strong>Sweeper</strong> maupun <strong>Courier</strong> karena proses validasi kendaraan
+                job sebelumnya terlewati dan langsung masuk ke pengecekan kendaraan pribadi.
+            </li>
+
+            <li>
+                <strong>Command /setcs</strong> —
+                Memperbaiki bug dimana status <strong>Character Story</strong> masih menampilkan
+                <strong>None</strong> setelah admin menggunakan perintah <code>/setcs</code>.
+                Kini status akan langsung aktif secara otomatis.
+            </li>
+
+            <li>
+                <strong>Command /unspec</strong> —
+                Memperbaiki bug yang dapat memicu crash akibat server membaca indeks negatif
+                serta beberapa callback yang berpotensi menyebabkan benturan memori.
+                Perbaikan telah diterapkan dan akan terus dipantau.
+            </li>
+
+            <li>
+                <strong>Command /spawn</strong> —
+                Memperbaiki bug dimana kendaraan tidak dapat dimunculkan dengan benar dan
+                justru dapat melakukan spawn ulang pada kendaraan yang sudah ada sehingga
+                berpotensi menyebabkan duplikasi kendaraan. Validasi kendaraan yang sedang
+                digunakan juga telah diperketat.
+            </li>
+
+            <li>
+                <strong>False Detection Faction Vehicle</strong> —
+                Memperbaiki bug yang menyebabkan sebagian kendaraan pribadi terdeteksi sebagai
+                kendaraan faction sehingga tidak dapat digunakan oleh pemiliknya.
+                Berikut demonstrasi bug yang telah diperbaiki:
+                <br><br>
+                <a href="https://i.imgur.com/BK1aGaL.mp4"
+                   target="_blank"
+                   style="color:#4FC3F7;text-decoration:none;font-weight:bold;">
+                   ▶ Lihat Video Demonstrasi
+                </a>
+            </li>
+
+        </ul>
+
+        <hr style="margin:25px 0; border-color:rgba(255,255,255,0.15);">
+
+        <h3 style="color:#64B5F6;">📝 Catatan</h3>
+
+        <blockquote style="
+            margin-top:15px;
+            padding:15px 20px;
+            border-left:4px solid #00E5FF;
+            background:rgba(255,255,255,0.05);
+            font-style:italic;
+            color:#ddd;
+        ">
+            "Update v1.1.11 berfokus pada peningkatan stabilitas sistem kendaraan dan server.
+            Berbagai bug kritis seperti kendaraan tidak bisa dinaiki, kendaraan masuk asuransi
+            saat logout, bug duplikasi kendaraan, validasi kendaraan job, command
+            <code>/setcs</code>, <code>/unspec</code>, <code>/spawn</code>, hingga false detection
+            kendaraan faction telah diperbaiki dan dioptimalkan. Beberapa sistem masih akan
+            terus dipantau untuk memastikan kestabilan server ke depannya."
+            <br><br>
+            <strong>Apabila masih menemukan kendala, silakan laporkan melalui halaman Report agar dapat segera kami tindak lanjuti.</strong>
+        </blockquote>
+
+    </div>
+</section>
+    
 <section style="margin-top: 100px; padding: 40px; color: white; text-align: center;">
     <h2 style="font-size: 2.5rem; margin-bottom: 20px;">📋 Changelog v1.1.10 — Harvest</h2>
 
