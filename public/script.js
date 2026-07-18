@@ -195,3 +195,225 @@ if (copyBtn) {
 console.clear();
 console.log("%c☀️ My Sunshine Roleplay", "font-size:24px;color:#FFD700;font-weight:bold;");
 console.log("%cSunshine AI Ready", "color:#00ff88;");
+
+
+/* ============================
+   SUPABASE CONFIG
+============================ */
+
+const SUPABASE_URL = "https://yohbzbcfrjgljeazyeyz.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_oVfjyPl_-36k-ANn3aAq8g_aY5gb18T";
+
+const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+/* ============================
+   ELEMENT
+============================ */
+
+const form = document.getElementById("postForm");
+const text = document.getElementById("text");
+const image = document.getElementById("image");
+const btn = document.getElementById("submitBtn");
+
+const preview = document.getElementById("preview");
+const placeholder = document.getElementById("placeholder");
+
+/* ============================
+   PREVIEW IMAGE
+============================ */
+
+image.addEventListener("change", () => {
+
+    const file = image.files[0];
+
+    if (!file) return;
+
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+
+    if (placeholder)
+        placeholder.style.display = "none";
+
+});
+
+/* ============================
+   POST
+============================ */
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const file = image.files[0];
+
+    if (!file) {
+        alert("Pilih gambar terlebih dahulu.");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Mengunggah...";
+
+    try {
+
+        /* Nama file unik */
+
+        const fileName =
+            Date.now() +
+            "_" +
+            Math.random().toString(36).substring(2) +
+            "." +
+            file.name.split(".").pop();
+
+        /* Upload ke Storage */
+
+        const { error: uploadError } = await supabase.storage
+            .from("posts")
+            .upload(fileName, file);
+
+        if (uploadError)
+            throw uploadError;
+
+        /* Ambil URL gambar */
+
+        const {
+            data: { publicUrl }
+        } = supabase.storage
+            .from("posts")
+            .getPublicUrl(fileName);
+
+        /* Simpan ke Database */
+
+        const { error: insertError } = await supabase
+            .from("posts")
+            .insert([
+                {
+                    text: text.value,
+                    image: publicUrl,
+                    created_at: new Date().toISOString()
+                }
+            ]);
+
+        if (insertError)
+            throw insertError;
+
+        alert("Postingan berhasil dibuat!");
+
+        window.location.href = "index.html";
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Gagal membuat postingan.");
+
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = "🚀 Posting";
+
+});
+
+// ===============================
+// Preview Gambar
+// ===============================
+
+file.addEventListener("change", () => {
+
+    preview.innerHTML = "";
+
+    const f = file.files[0];
+
+    if (!f) return;
+
+    const maxSize = 10 * 1024 * 1024;
+
+    if (f.size > maxSize) {
+
+        alert("Ukuran gambar maksimal 10 MB.");
+
+        file.value = "";
+
+        return;
+
+    }
+
+    const allowed = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp"
+    ];
+
+    if (!allowed.includes(f.type)) {
+
+        alert("Format gambar harus JPG, PNG, atau WEBP.");
+
+        file.value = "";
+
+        return;
+
+    }
+
+    const url = URL.createObjectURL(f);
+
+    preview.innerHTML = `
+        <img src="${url}" alt="Preview">
+        <div class="info">${f.name}</div>
+    `;
+
+});
+
+// ===============================
+// Submit Form
+// ===============================
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "⏳ Mengirim...";
+
+    const data = new FormData(form);
+
+    try {
+
+        const response = await fetch("/api/feedback", {
+
+            method: "POST",
+            body: data
+
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+
+            alert("✅ Terima kasih! Kritik & Saran berhasil dikirim.");
+
+            form.reset();
+
+            preview.innerHTML = "";
+
+        } else {
+
+            alert(result.message || "Gagal mengirim kritik & saran.");
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("❌ Tidak dapat terhubung ke server.");
+
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "💡 Kirim Kritik & Saran";
+
+});
