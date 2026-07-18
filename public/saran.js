@@ -1,245 +1,80 @@
 const express = require("express");
-const app = express();
+const axios = require("axios");
 const multer = require("multer");
-const path = require("path");
 
-// ===============================
-// Preview File
-// ===============================
+const app = express();
 
-function previewFile(file) {
-
-    preview.innerHTML = "";
-
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-
-    preview.innerHTML = `
-        <img src="${url}" alt="Preview">
-        <p class="info">${file.name}</p>
-    `;
-
-}
-
-fileInput.addEventListener("change", () => {
-
-    if (fileInput.files.length)
-        previewFile(fileInput.files[0]);
-
+const upload = multer({
+    storage: multer.memoryStorage()
 });
 
-// ===============================
-// Drag & Drop
-// ===============================
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1526011757594935450/MqSk8SxGFVswHoW1EdDKtsLasSeMng-4zUo11ByCP0aJaN9Rz4lWgB5EcAnBp_rjJRuJ";
 
-["dragenter", "dragover"].forEach(event => {
+app.post("/api/feedback", upload.single("lampiran"), async (req, res) => {
 
-    uploadBox.addEventListener(event, e => {
+    try {
 
-        e.preventDefault();
+        const {
+            ucp,
+            character,
+            kategori,
+            judul,
+            pesan
+        } = req.body;
 
-        uploadBox.style.borderColor = "#00ff88";
-        uploadBox.style.background = "#202020";
-
-    });
-
-});
-
-["dragleave", "drop"].forEach(event => {
-
-    uploadBox.addEventListener(event, e => {
-
-        e.preventDefault();
-
-        uploadBox.style.borderColor = "#FFD700";
-        uploadBox.style.background = "";
-
-    });
-
-});
-
-uploadBox.addEventListener("drop", e => {
-
-    e.preventDefault();
-
-    const files = e.dataTransfer.files;
-
-    if (!files.length) return;
-
-    fileInput.files = files;
-
-    previewFile(files[0]);
-
-});
-
-// ===============================
-// Submit Form
-// ===============================
-
-form.addEventListener("submit", function (e) {
-
-    e.preventDefault();
-
-    const ucp = form.ucp.value.trim();
-    const judul = form.judul.value.trim();
-    const pesan = form.pesan.value.trim();
-
-    if (!ucp) {
-
-        alert("Nama UCP wajib diisi.");
-        return;
-
-    }
-
-    if (!judul) {
-
-        alert("Judul masukan wajib diisi.");
-        return;
-
-    }
-
-    if (!pesan) {
-
-        alert("Isi kritik & saran wajib diisi.");
-        return;
-
-    }
-
-    submitFeedback();
-
-});
-
-// ===============================
-// Upload
-// ===============================
-
-function submitFeedback() {
-
-    submitBtn.disabled = true;
-
-    submitBtn.innerHTML = "Mengirim...";
-
-    const data = new FormData(form);
-
-    const xhr = new XMLHttpRequest();
-
-    xhr.open("POST", "/api/feedback", true);
-
-    xhr.upload.onprogress = function (e) {
-
-        if (!e.lengthComputable) return;
-
-        const percent = Math.round((e.loaded / e.total) * 100);
-
-        submitBtn.innerHTML = `Mengupload ${percent}%`;
-
-    };
-
-    xhr.onload = function () {
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML = "💡 Kirim Kritik & Saran";
-
-        if (xhr.status === 200) {
-
-            let res = {};
-
-            try {
-
-                res = JSON.parse(xhr.responseText);
-
-            } catch {
-
-                alert("Response server tidak valid.");
-                return;
-
+        const embed = {
+            title: "💡 Kritik & Saran Baru",
+            color: 0xFFD700,
+            fields: [
+                {
+                    name: "👤 Nama UCP",
+                    value: ucp || "-",
+                    inline: true
+                },
+                {
+                    name: "🎮 Character",
+                    value: character || "-",
+                    inline: true
+                },
+                {
+                    name: "📂 Kategori",
+                    value: kategori || "-",
+                    inline: true
+                },
+                {
+                    name: "📝 Judul",
+                    value: judul || "-",
+                    inline: false
+                },
+                {
+                    name: "💬 Isi Kritik / Saran",
+                    value: pesan || "-",
+                    inline: false
+                }
+            ],
+            timestamp: new Date().toISOString(),
+            footer: {
+                text: "My Sunshine Roleplay"
             }
+        };
 
-            if (res.success) {
+        await axios.post(WEBHOOK_URL, {
+            embeds: [embed]
+        });
 
-                alert("✅ Terima kasih! Kritik & saran berhasil dikirim.");
+        res.json({
+            success: true
+        });
 
-                form.reset();
+    } catch (err) {
 
-                preview.innerHTML = "";
+        console.error(err);
 
-            } else {
-
-                alert(res.message || "Gagal mengirim kritik & saran.");
-
-            }
-
-        } else {
-
-            alert("Server Error (" + xhr.status + ")");
-
-        }
-
-    };
-
-    xhr.onerror = function () {
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML = "💡 Kirim Kritik & Saran";
-
-        alert("Tidak dapat terhubung ke server.");
-
-    };
-
-    xhr.send(data);
-
-}
-
-// ===============================
-// File Validation
-// ===============================
-
-fileInput.addEventListener("change", () => {
-
-    const file = fileInput.files[0];
-
-    if (!file) return;
-
-    const maxSize = 10 * 1024 * 1024; // 10 MB
-
-    if (file.size > maxSize) {
-
-        alert("Ukuran gambar maksimal 10 MB.");
-
-        fileInput.value = "";
-
-        preview.innerHTML = "";
-
-        return;
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
 
     }
-
-    const allowed = [
-
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/webp"
-
-    ];
-
-    if (!allowed.includes(file.type)) {
-
-        alert("Hanya file JPG, PNG, atau WEBP yang diperbolehkan.");
-
-        fileInput.value = "";
-
-        preview.innerHTML = "";
-
-        return;
-
-    }
-
-    previewFile(file);
 
 });
-
-console.log("✅ Kritik & Saran System Loaded");
