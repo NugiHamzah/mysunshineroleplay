@@ -1,14 +1,7 @@
-// ==========================================
-// My Sunshine Roleplay
-// Kritik & Saran System
-// saran.js
-// ==========================================
-
-const form = document.getElementById("feedbackForm");
-const fileInput = document.getElementById("file");
-const preview = document.getElementById("preview");
-const uploadBox = document.querySelector(".upload");
-const submitBtn = form.querySelector("button");
+const express = require("express");
+const app = express();
+const multer = require("multer");
+const path = require("path");
 
 // ===============================
 // Preview File
